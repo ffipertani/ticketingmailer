@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!--/*/ <th:block th:include="fragments/main:: headerfiles">
+         </th:block> /*/-->
+  <title>Ticketing Email</title>
+  <style>
+   input .mdl-button--file {
+
+    cursor: pointer;
+    height: 100%;
+    right: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 300px;
+    z-index: 4;
+
+}
+
+.mdl-textfield--file .mdl-textfield__input
+
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+  }
+
+.mdl-textfield--file .mdl-button--file {
+    right: 0;
+  }
+  </style>
+</head>
+<body class="components">
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+
+<script>
+  document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.files[0].name;
+};
+</script>
+  <header
+      th:replace="fragments/main :: header()"></header>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <span>
+       <form action="upload.html" method="post" enctype="multipart/form-data"> Select an excel file:
+          <input type="file" name="fileToUpload" id="fileToUpload">
+          <input type="submit" value="Upload Excel" name="submit">
+       </form>
+    </span>
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+             style="width:100%;margin:15px 0px;">
+        <thead class="thead-dark">
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Id</th>
+          <th class="mdl-data-table__cell--non-numeric">Marca</th>
+          <th class="mdl-data-table__cell--non-numeric">Modello</th>
+          <th class="mdl-data-table__cell--non-numeric">Manutenzione</th>
+          <th class="mdl-data-table__cell--non-numeric">Data Installazione</th>
+          <th class="mdl-data-table__cell--non-numeric">Data Email</th>
+          <th class="mdl-data-table__cell--non-numeric">Data manutenzione</th>
+          <th class="mdl-data-table__cell--non-numeric"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="maintenanceRemainder: ${maintenanceRemainders}" >
+          <td class="mdl-data-table__cell--non-numeric"  th:text="${maintenanceRemainder.id}"></td>
+          <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.marca}"></td>
+          <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.modello}"></td>
+          <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.manutenzione}"></td>
+          <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.dataInstallazione}"></td>
+          <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.dataEmail}"></td>
+          <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.dataManutenzione}"></td>
+          <td class="mdl-data-table__cell--non-numeric"></td>
+    
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+</body>
+</html>
