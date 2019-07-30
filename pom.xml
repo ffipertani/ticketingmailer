@@ -2,16 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.baeldung</groupId>
-  <artifactId>spring-boot-bootstrap</artifactId>
-  <name>spring-boot-bootstrap</name>
-  <description>Demo project for Spring Boot</description>
+  <groupId>com.ff</groupId>
+  <artifactId>ticketingemailer</artifactId>
+  <name>ticketingemailer</name>
+  <description>Ticketing emailer</description>
   <packaging>jar</packaging>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.1.5.RELEASE</version>
+
   </parent>
 
 
@@ -48,32 +49,51 @@
       <version>${rest-assured.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>${servlet.version}</version>
-    </dependency>
+
   </dependencies>
 
 
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>**/cloud/config/*.java</exclude>
-          </excludes>
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-compiler-plugin</artifactId>-->
+        <!--<configuration>-->
 
+        <!--</configuration>-->
+      <!--</plugin>-->
+
+      <plugin>
+        <groupId>com.heroku.sdk</groupId>
+        <artifactId>heroku-maven-plugin</artifactId>
+        <version>2.0.8</version>
+
+        <configuration>
+          <appName>ticketingemail</appName>
+          <includeTarget>false</includeTarget>
+          <includes>
+            <include>target/ticketingemailer-2.1.5.RELEASE.jar</include>
+          </includes>
+          <processTypes>
+            <web>java -jar ticketingemailer-2.1.5.RELEASE.jar</web>
+          </processTypes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.ff.ticketingmailer.Application</mainClass>
         </configuration>
       </plugin>
     </plugins>
+
   </build>
 
   <properties>
     <servlet.version>4.0.0</servlet.version>
+    <start-class>com.ff.ticketingmailer.Application</start-class>
   </properties>
 
 </project>
