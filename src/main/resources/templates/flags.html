@@ -47,6 +47,9 @@
           <input type="submit" value="Upload Excel" name="submit">
        </form>
     </span>
+      <div>
+        All the notifications will be sent to <b><span th:text="${to}"/></b>
+      </div>
       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
              style="width:100%;margin:15px 0px;">
         <thead class="thead-dark">
@@ -70,8 +73,17 @@
           <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.dataInstallazione}"></td>
           <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.dataEmail}"></td>
           <td class="mdl-data-table__cell--non-numeric" th:text="${maintenanceRemainder.dataManutenzione}"></td>
-          <td class="mdl-data-table__cell--non-numeric"></td>
-    
+          <td class="mdl-data-table__cell--non-numeric">
+            <form action="/manutenzione.html" method="GET">
+              <input type="hidden" name="idManutenzione" th:value="${maintenanceRemainder.id}"/>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="submit">
+                Aggiungi manutenzione
+              </button>
+            </form>
+
+
+          </td>
+
         </tr>
         </tbody>
       </table>
